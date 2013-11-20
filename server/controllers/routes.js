@@ -1,10 +1,15 @@
 // See documentation on https://github.com/frankrousseau/americano#routes
 
-var index = require('./index');
+ReceiptDetails = require('./receiptdetails');
 
 module.exports = {
-  'foo': {
-    get: index.main
+  'receiptdetails': {
+	  get: ReceiptDetails.list
+   }, 
+  'receiptdetails/new': {
+      get: ReceiptDetails.list
+  },
+  'test': {
+      get: ReceiptDetails.test
   }
 };
-

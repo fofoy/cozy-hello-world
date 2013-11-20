@@ -13,17 +13,6 @@ a:visited {
 a:hover {
   color: #665248;
 }
-#home-view {
-  width: 600px;
-  height: 200px;
-  margin: 20px auto;
-}
-#home-view #content {
-  background: #fff;
-  padding: 20px;
-  -webkit-border-radius: 4px;
-  border-radius: 4px;
-}
 /* Default font settings */
 body {
   font-size: 15px;
@@ -71,27 +60,6 @@ ol {
   list-style-type: none;
 }
 /* Style */
-#content {
-  width: 605px;
-  margin: 0 auto;
-  margin-top: 40px;
-  margin-bottom: 60px;
-}
-h1 {
-  background: #91a2c0;
-  background-repeat: no-repeat;
-  background-position: 2px;
-  color: #fff;
-  width: 330px;
-  padding-left: 18px;
-  -webkit-border-radius: 5px;
-  border-radius: 5px;
-}
-#props {
-  position: relative;
-  top: 36px;
-  font-size: 18px;
-  padding-left: 373px;
-  color: #eee;
-  font-style: italic;
-}
+
+
+/*# sourceMappingURL=app.css.map*/

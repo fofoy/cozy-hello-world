@@ -37,43 +37,59 @@
     return function(name) {
       var dir = dirname(path);
       var absolute = expand(dir, name);
-      return globals.require(absolute);
+      return globals.require(absolute, path);
     };
   };
 
   var initModule = function(name, definition) {
     var module = {id: name, exports: {}};
+    cache[name] = module;
     definition(module.exports, localRequire(name), module);
-    var exports = cache[name] = module.exports;
-    return exports;
+    return module.exports;
   };
 
-  var require = function(name) {
+  var require = function(name, loaderPath) {
     var path = expand(name, '.');
+    if (loaderPath == null) loaderPath = '/';
 
-    if (has(cache, path)) return cache[path];
+    if (has(cache, path)) return cache[path].exports;
     if (has(modules, path)) return initModule(path, modules[path]);
 
     var dirIndex = expand(path, './index');
-    if (has(cache, dirIndex)) return cache[dirIndex];
+    if (has(cache, dirIndex)) return cache[dirIndex].exports;
     if (has(modules, dirIndex)) return initModule(dirIndex, modules[dirIndex]);
 
-    throw new Error('Cannot find module "' + name + '"');
+    throw new Error('Cannot find module "' + name + '" from '+ '"' + loaderPath + '"');
   };
 
-  var define = function(bundle) {
-    for (var key in bundle) {
-      if (has(bundle, key)) {
-        modules[key] = bundle[key];
+  var define = function(bundle, fn) {
+    if (typeof bundle === 'object') {
+      for (var key in bundle) {
+        if (has(bundle, key)) {
+          modules[key] = bundle[key];
+        }
+      }
+    } else {
+      modules[bundle] = fn;
+    }
+  };
+
+  var list = function() {
+    var result = [];
+    for (var item in modules) {
+      if (has(modules, item)) {
+        result.push(item);
       }
     }
-  }
+    return result;
+  };
 
   globals.require = require;
   globals.require.define = define;
+  globals.require.register = define;
+  globals.require.list = list;
   globals.require.brunch = true;
 })();
-
 // Make it safe to do console.log() always.
 (function (con) {
   var method;
@@ -85,9 +101,8 @@
     con[method] = con[method] || dummy;
   }
 })(window.console = window.console || {});
-;
 
-/*!
+;/*!
  * jQuery JavaScript Library v1.7.2
  * http://jquery.com/
  *
@@ -9491,9 +9506,8 @@ if ( typeof define === "function" && define.amd && define.amd.jQuery ) {
 
 
 })( window );
-;
 
-//     Underscore.js 1.3.1
+;//     Underscore.js 1.3.1
 //     (c) 2009-2012 Jeremy Ashkenas, DocumentCloud Inc.
 //     Underscore is freely distributable under the MIT license.
 //     Portions of Underscore are inspired or borrowed from Prototype,
@@ -10492,9 +10506,8 @@ if ( typeof define === "function" && define.amd && define.amd.jQuery ) {
   };
 
 }).call(this);
-;
 
-//     Backbone.js 0.9.2
+;//     Backbone.js 0.9.2
 
 //     (c) 2010-2012 Jeremy Ashkenas, DocumentCloud Inc.
 //     Backbone may be freely distributed under the MIT license.
@@ -11924,9 +11937,8 @@ if ( typeof define === "function" && define.amd && define.amd.jQuery ) {
     throw new Error('A "url" property or function must be specified');
   };
 
-}).call(this);;
-
-/**
+}).call(this);
+;/**
  * |-------------------|
  * | Backbone-Mediator |
  * |-------------------|
@@ -12126,9 +12138,8 @@ if ( typeof define === "function" && define.amd && define.amd.jQuery ) {
 
   return Backbone;
 
-});;
-
-/* ===================================================
+});
+;/* ===================================================
  * bootstrap-transition.js v2.0.2
  * http://twitter.github.com/bootstrap/javascript.html#transitions
  * ===================================================
@@ -12178,9 +12189,8 @@ if ( typeof define === "function" && define.amd && define.amd.jQuery ) {
 
   })
 
-}( window.jQuery );;
-
-/* ==========================================================
+}( window.jQuery );
+;/* ==========================================================
  * bootstrap-alert.js v2.0.2
  * http://twitter.github.com/bootstrap/javascript.html#alerts
  * ==========================================================
@@ -12273,9 +12283,8 @@ if ( typeof define === "function" && define.amd && define.amd.jQuery ) {
     $('body').on('click.alert.data-api', dismiss, Alert.prototype.close)
   })
 
-}( window.jQuery );;
-
-/* ============================================================
+}( window.jQuery );
+;/* ============================================================
  * bootstrap-button.js v2.0.2
  * http://twitter.github.com/bootstrap/javascript.html#buttons
  * ============================================================
@@ -12374,9 +12383,8 @@ if ( typeof define === "function" && define.amd && define.amd.jQuery ) {
     })
   })
 
-}( window.jQuery );;
-
-/* ==========================================================
+}( window.jQuery );
+;/* ==========================================================
  * bootstrap-carousel.js v2.0.2
  * http://twitter.github.com/bootstrap/javascript.html#carousel
  * ==========================================================
@@ -12536,9 +12544,8 @@ if ( typeof define === "function" && define.amd && define.amd.jQuery ) {
     })
   })
 
-}( window.jQuery );;
-
-/* =============================================================
+}( window.jQuery );
+;/* =============================================================
  * bootstrap-collapse.js v2.0.2
  * http://twitter.github.com/bootstrap/javascript.html#collapse
  * =============================================================
@@ -12675,9 +12682,8 @@ if ( typeof define === "function" && define.amd && define.amd.jQuery ) {
     })
   })
 
-}( window.jQuery );;
-
-/* ============================================================
+}( window.jQuery );
+;/* ============================================================
  * bootstrap-dropdown.js v2.0.2
  * http://twitter.github.com/bootstrap/javascript.html#dropdowns
  * ============================================================
@@ -12768,9 +12774,8 @@ if ( typeof define === "function" && define.amd && define.amd.jQuery ) {
     $('body').on('click.dropdown.data-api', toggle, Dropdown.prototype.toggle)
   })
 
-}( window.jQuery );;
-
-/* =========================================================
+}( window.jQuery );
+;/* =========================================================
  * bootstrap-modal.js v2.0.2
  * http://twitter.github.com/bootstrap/javascript.html#modals
  * =========================================================
@@ -12979,9 +12984,8 @@ if ( typeof define === "function" && define.amd && define.amd.jQuery ) {
     })
   })
 
-}( window.jQuery );;
-
-/* ===========================================================
+}( window.jQuery );
+;/* ===========================================================
  * bootstrap-tooltip.js v2.0.2
  * http://twitter.github.com/bootstrap/javascript.html#tooltips
  * Inspired by the original jQuery.tipsy by Jason Frame
@@ -13250,9 +13254,8 @@ if ( typeof define === "function" && define.amd && define.amd.jQuery ) {
   , template: '<div class="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner"></div></div>'
   }
 
-}( window.jQuery );;
-
-/* ===========================================================
+}( window.jQuery );
+;/* ===========================================================
  * bootstrap-popover.js v2.0.2
  * http://twitter.github.com/bootstrap/javascript.html#popovers
  * ===========================================================
@@ -13346,9 +13349,8 @@ if ( typeof define === "function" && define.amd && define.amd.jQuery ) {
   , template: '<div class="popover"><div class="arrow"></div><div class="popover-inner"><h3 class="popover-title"></h3><div class="popover-content"><p></p></div></div></div>'
   })
 
-}( window.jQuery );;
-
-/* =============================================================
+}( window.jQuery );
+;/* =============================================================
  * bootstrap-scrollspy.js v2.0.2
  * http://twitter.github.com/bootstrap/javascript.html#scrollspy
  * =============================================================
@@ -13472,9 +13474,8 @@ if ( typeof define === "function" && define.amd && define.amd.jQuery ) {
     })
   })
 
-}( window.jQuery );;
-
-/* ========================================================
+}( window.jQuery );
+;/* ========================================================
  * bootstrap-tab.js v2.0.2
  * http://twitter.github.com/bootstrap/javascript.html#tabs
  * ========================================================
@@ -13603,9 +13604,8 @@ if ( typeof define === "function" && define.amd && define.amd.jQuery ) {
     })
   })
 
-}( window.jQuery );;
-
-/* =============================================================
+}( window.jQuery );
+;/* =============================================================
  * bootstrap-typeahead.js v2.0.2
  * http://twitter.github.com/bootstrap/javascript.html#typeahead
  * =============================================================
@@ -13875,9 +13875,8 @@ if ( typeof define === "function" && define.amd && define.amd.jQuery ) {
     })
   })
 
-}( window.jQuery );;
-
-
+}( window.jQuery );
+;
 jade = (function(exports){
 /*!
  * Jade - runtime
@@ -14056,5 +14055,6 @@ exports.rethrow = function rethrow(err, filename, lineno){
   return exports;
 
 })({});
-;
 
+;
+//# sourceMappingURL=vendor.js.map
