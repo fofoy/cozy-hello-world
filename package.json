@@ -4,7 +4,7 @@
   "engines": [
     "node = 0.8.x"
   ],
-  "description": "Mylife agent personnel",
+  "description": "Mylife, prototype pour la FING",
   "license": "MIT",
   "repository": {
     "type": "git",
