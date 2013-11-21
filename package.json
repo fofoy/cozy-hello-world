@@ -1,5 +1,5 @@
 {
-  "name": "cozy-template-js",
+  "name": "cozy-mylife",
   "version": "1.0.0",
   "engines": [
     "node = 0.8.x"
@@ -27,5 +27,5 @@
     "start": "node server.js"
   },
   "cozy-permissions": {},
-  "cozy-displayName": "Poupou"
+  "cozy-displayName": "MyLife"
 }
