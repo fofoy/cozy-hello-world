@@ -130,7 +130,7 @@ module.exports = Backbone.Router.extend({
 
   home: function () {
     $('body').html(application.homeView.render().el);
-  }
+  },
 });
 
 });
@@ -165,13 +165,36 @@ module.exports = View.extend({
 
 });
 
+;require.register("views/receiptdetails_view", function(exports, require, module) {
+var View = require('./view');
+var template = require('./templates/receiptdetails');
+
+module.exports = View.extend({
+  id: 'receiptdetails-view',
+  template: template
+});
+
+});
+
 ;require.register("views/templates/home", function(exports, require, module) {
 module.exports = function anonymous(locals, attrs, escape, rethrow, merge) {
 attrs = attrs || jade.attrs; escape = escape || jade.escape; rethrow = rethrow || jade.rethrow; merge = merge || jade.merge;
 var buf = [];
 with (locals || {}) {
 var interp;
-buf.push('<div id="content"><h1>Cozy template mothafucka</h1><h2>Welcome</h2><ul><li> <a href="https://github.com/mycozycloud/cozy-setup/wiki">Documentation</a></li><li> <a href="https://github.com/mycozycloud/cozy-setup/wiki/Getting-started">Getting Started</a></li><li> <a href="https://github.com/mycozycloud">Github</a></li></ul></div>');
+buf.push('<header><h1>Mylife</h1></header><div id="content"><h1>Cozy template mothafucka</h1><h2>Welcome</h2><ul><li> <a href="https://github.com/mycozycloud/cozy-setup/wiki">Documentation</a></li><li> <a href="https://github.com/mycozycloud/cozy-setup/wiki/Getting-started">Getting Started</a></li><li> <a href="https://github.com/mycozycloud">Github</a></li></ul></div>');
+}
+return buf.join("");
+};
+});
+
+;require.register("views/templates/receiptdetail", function(exports, require, module) {
+module.exports = function anonymous(locals, attrs, escape, rethrow, merge) {
+attrs = attrs || jade.attrs; escape = escape || jade.escape; rethrow = rethrow || jade.rethrow; merge = merge || jade.merge;
+var buf = [];
+with (locals || {}) {
+var interp;
+buf.push('<div id="content"><h1>Cozy receiptdetails</h1><h2>Welcome</h2><ul><li> <a href="https://github.com/mycozycloud/cozy-setup/wiki">Documentation</a></li><li> <a href="https://github.com/mycozycloud/cozy-setup/wiki/Getting-started">Getting Started</a></li><li> <a href="https://github.com/mycozycloud">Github</a></li></ul></div>');
 }
 return buf.join("");
 };

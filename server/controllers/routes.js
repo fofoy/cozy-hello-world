@@ -4,12 +4,12 @@ ReceiptDetails = require('./receiptdetails');
 
 module.exports = {
   'receiptdetails': {
-	  get: ReceiptDetails.list
+		get: ReceiptDetails.list
    }, 
   'receiptdetails/new': {
-      get: ReceiptDetails.list
+    get: ReceiptDetails.list
   },
   'test': {
-      get: ReceiptDetails.test
+		get: ReceiptDetails.test
   }
 };
