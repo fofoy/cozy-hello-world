@@ -94,7 +94,9 @@ require.register("application", function(exports, require, module) {
 // Application bootstrapper.
 var Application = {
   initialize: function () {
-    var HomeView = require('views/home_view'), Router = require('lib/router');
+    var HomeView = require('views/home_view'), 
+        ReceiptView = require('views/receiptdetails_view');
+    var Router = require('lib/router');
     // Ideally, initialized classes should be kept in controllers & mediator.
     // If you're making big webapp, here's more sophisticated skeleton
     // https://github.com/paulmillr/brunch-with-chaplin
@@ -188,7 +190,7 @@ return buf.join("");
 };
 });
 
-;require.register("views/templates/receiptdetail", function(exports, require, module) {
+;require.register("views/templates/receiptdetails", function(exports, require, module) {
 module.exports = function anonymous(locals, attrs, escape, rethrow, merge) {
 attrs = attrs || jade.attrs; escape = escape || jade.escape; rethrow = rethrow || jade.rethrow; merge = merge || jade.merge;
 var buf = [];

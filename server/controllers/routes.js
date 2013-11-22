@@ -1,5 +1,6 @@
 // See documentation on https://github.com/frankrousseau/americano#routes
 
+Receipts = require('./receipts');
 ReceiptDetails = require('./receiptdetails');
 
 module.exports = {
@@ -11,5 +12,11 @@ module.exports = {
   },
   'test': {
 		get: ReceiptDetails.test
-  }
+  },
+  'receipt/list': {
+		get: Receipts.list
+	},
+	'receipt': {
+		get: ReceiptDetails.test
+	},
 };
